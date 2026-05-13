@@ -1,30 +1,26 @@
 import React from "react";
-import { todoListPropTypes } from "./proptypes";
 import { Checkbox } from "./checkbox";
 import { Icon } from "./icon";
 import "./styles.css";
-import T from "prop-types";
 import { withCheckedStyles } from "./withCheckedStyles";
 import { TodoText } from "./todoText";
 
 export const Todoitem = withCheckedStyles(
-  ({ todo, onSwitch, onRemove, onEdit, additionalStyles }) => {
+  ({ todo, onSwitch, onRemove, onEdit, additionalStyles, idx }) => {
     return (
-      <div className="toDoItem">
+      <div
+        className="toDoItem"
+        style={{ backgroundColor: idx % 2 === 0 ? "lavenderblush" : "white" }}
+      >
         <Checkbox {...{ todo, onSwitch }} />
         <TodoText {...{ todo, additionalStyles, onEdit }} />
-        <Icon name="remove" onClick={() => onRemove(todo._id)} />
+        <Icon
+          name="remove"
+          onClick={() => onRemove(todo._id)}
+          size="18px"
+          style={{ marginTop: "5px" }}
+        />
       </div>
     );
-  }
+  },
 );
-
-Todoitem.propTypes = {
-  ...todoListPropTypes,
-  onRemove: T.func.isRequired,
-  onEdit: T.func.isRequired,
-  additionalStyles: T.shape({
-    textDecoration: T.string,
-    color: T.string
-  })
-};

@@ -8,20 +8,20 @@ import { TodosContext } from "./todosContext";
 
 export const App = () => {
   const { todos, onAdd, onSwitch, onRemove, onEdit } = useTodosHook();
-
   return (
     <div className="application">
-      <Text size="18px">Todos</Text>
+      <h2>Todos</h2>
       <Todoinput onAdd={onAdd} />
       <TodosContext.Provider value={todos}>
         <div className="todolist">
-          {todos.map(todo => (
+          {todos.map((todo, idx) => (
             <Todoitem
               key={todo._id}
               todo={todo}
               onSwitch={onSwitch}
               onRemove={onRemove}
               onEdit={onEdit}
+              idx={idx}
             />
           ))}
         </div>

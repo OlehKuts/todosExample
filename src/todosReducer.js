@@ -4,7 +4,7 @@ export const TODOS_ACTIONS = {
   ADD: "add",
   COMPLETE: "complete",
   REMOVE: "remove",
-  EDIT: "edit"
+  EDIT: "edit",
 }; //об'єкт з констант для уникнення помилок
 
 export const initialState = () => {
@@ -22,18 +22,18 @@ export const todosReducer = (todos, action) => {
         {
           _id: uuid(),
           text: text,
-          completed: false
-        }
+          completed: false,
+        },
       ];
     case TODOS_ACTIONS.COMPLETE:
       return todos.map((todo) =>
-        todo._id === _id ? { ...todo, completed: !todo.completed } : todo
+        todo._id === _id ? { ...todo, completed: !todo.completed } : todo,
       );
     case TODOS_ACTIONS.REMOVE:
       return todos.filter((todo) => todo._id !== _id);
 
     case TODOS_ACTIONS.EDIT:
-      return todos.map((todo) => (todo._id !== newTodo._id ? newTodo : todo));
+      return todos.map((todo) => (todo._id === newTodo._id ? newTodo : todo));
 
     default:
       throw new Error(); // видаватиме помилку при передачі невідомого методу
